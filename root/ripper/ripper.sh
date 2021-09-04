@@ -36,8 +36,9 @@ INFO=$"`makemkvcon -r --cache=1 info disc:9999 | grep DRV:0`"
 EMPTY=`echo $INFO | grep -o 'DRV:0,0,999,0,"'`
 OPEN=`echo $INFO | grep -o 'DRV:0,1,999,0,"'`
 LOADING=`echo $INFO | grep -o 'DRV:0,3,999,0,"'`
-BD1=`echo $INFO | grep -o 'DRV:0,2,999,12,"'`
-BD2=`echo $INFO | grep -o 'DRV:0,2,999,28,"'`
+BD1=`echo $INFO | grep -o 'DRV:0,2,999,12,'`
+BD2=`echo $INFO | grep -o 'DRV:0,2,999,28,'`
+BD3=`echo $INFO | grep -o 'DRV:0,2,999,4,'`
 DVD=`echo $INFO | grep -o 'DRV:0,2,999,1,"'`
 CD1=`echo $INFO | grep -o 'DRV:0,2,999,0,"'`
 CD2=`echo $INFO | grep -o '","","'$DRIVE'"'`
@@ -68,7 +69,7 @@ if [ "$LOADING" = 'DRV:0,3,999,0,"' ]; then
  echo "$(date "+%d.%m.%Y %T") : Disc still loading"
 fi
 
-if [ "$BD1" = 'DRV:0,2,999,12,"' ] || [ "$BD2" = 'DRV:0,2,999,28,"' ]; then
+if [ "$BD1" = 'DRV:0,2,999,12,' ] || [ "$BD2" = 'DRV:0,2,999,28,' ] || [ "$BD3" = 'DRV:0,2,999,4,' ]; then
  DISKLABEL=`echo $INFO | grep -o -P '(?<=",").*(?=",")'`
  BDPATH="$STORAGE_BD"/"$DISKLABEL"
  BLURAYNUM=`echo $INFO | grep $DRIVE | cut -c5`
